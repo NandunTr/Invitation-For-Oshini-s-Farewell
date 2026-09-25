@@ -37,7 +37,6 @@
     position:relative;
     overflow-x:hidden;
   }
-  /* soft cloud shapes, decorative, non-interactive */
   .cloud{
     position:fixed;
     border-radius:50%;
@@ -120,33 +119,8 @@
     color: var(--ink-soft);
     max-width: 46ch;
     line-height:1.5;
-    margin: 0 0 26px;
+    margin: 0 0 6px;
   }
-
-  .passenger{
-    margin-top: 8px;
-  }
-  .passenger label{
-    display:block;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing:.1em;
-    color: var(--ink-soft);
-    margin-bottom: 6px;
-  }
-  .passenger input{
-    width:100%;
-    font-family: var(--script);
-    font-size: 26px;
-    color: var(--ink);
-    background: transparent;
-    border:none;
-    border-bottom: 2px solid var(--perf);
-    padding: 4px 2px 8px;
-    outline: none;
-  }
-  .passenger input:focus{ border-bottom-color: var(--amber); }
-  .passenger input::placeholder{ color:#9aa7ad; font-family: var(--serif); font-size:18px;}
 
   .letter p{
     font-size: 17px;
@@ -247,42 +221,6 @@
     font-style: italic;
   }
 
-  .logbook h2{
-    font-family: var(--serif);
-    font-size: 24px;
-    margin: 0 0 6px;
-  }
-  .logbook .sub{ font-size:15px; margin-bottom:20px;}
-  textarea{
-    width:100%;
-    min-height: 90px;
-    font-family: var(--serif);
-    font-size:16px;
-    padding: 12px 14px;
-    border: 1.5px solid var(--perf);
-    border-radius: var(--radius);
-    resize: vertical;
-    background: #fffdf8;
-    color: var(--ink);
-  }
-  textarea:focus, .passenger input:focus{ outline:none; }
-  textarea:focus-visible{ border-color: var(--amber); }
-
-  .log-actions{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
-
-  .entries{ margin-top: 26px; display:flex; flex-direction:column; gap:14px; }
-  .entry{
-    border-left: 2px solid var(--amber);
-    padding: 4px 0 4px 14px;
-  }
-  .entry .who{
-    font-family: var(--script);
-    font-size: 19px;
-  }
-  .entry .msg{ font-size:15px; line-height:1.55; color: var(--ink); margin-top:2px;}
-  .entry .stamp{ font-family: var(--mono); font-size:10px; color:var(--ink-soft); margin-top:4px;}
-  .empty-log{ font-size:14px; color: var(--ink-soft); font-style:italic; }
-
   .footer-stub{ text-align:center; }
   .barcode{
     height: 38px;
@@ -327,19 +265,18 @@
     </div>
     <h1>A Little Farewell, <br>Before a New Beginning..</h1>
     <p class="sub">As I prepare to leave for the UK, I wanted to pause and celebrate this chapter with the people who made it so special.</p>
-
   </section>
 
   <div class="perf" role="presentation"></div>
 
   <section class="stub letter">
-    <p class="to" id="letterTo">Dear Dulara ayya,</p>
-    <p>Thank you for being part of my journey. Thank you for the laughter, the memories, the endless support, 
+    <p class="to">Dear Dulara ayya,</p>
+    <p>Thank you for being part of my journey. Thank you for the laughter, the memories, the endless support,
         and the friendship I'll carry with me wherever life takes me.</p>
     <p>It would mean the world to have you with me for one last lunch before I leave.</p>
     <p class="sign">With love,<br>Oshini</p>
-    <p class="note-please">As I begin this new journey far from home, 
-        I'd love to carry a little piece of each of you with me. Instead of a gift, 
+    <p class="note-please">As I begin this new journey far from home,
+        I'd love to carry a little piece of each of you with me. Instead of a gift,
         please bring me a handwritten note a memory, a wish, or a few words from your heart. I promise I'll treasure it forever.</p>
   </section>
 
@@ -376,21 +313,6 @@
 
   <div class="perf" role="presentation"></div>
 
-  <section class="stub logbook">
-    <h2>Flight log</h2>
-    <p class="sub">Leave a memory, a thought, or how you see me. I'll be reading these on the plane.</p>
-
-    <textarea id="logMessage" placeholder="Write your note here..." aria-label="Your note for Nandun"></textarea>
-    <div class="log-actions">
-      <button class="btn primary" id="saveNote">Save my note</button>
-      <button class="btn" id="sendNote">Send to Nandun</button>
-    </div>
-
-    <div class="entries" id="entries"></div>
-  </section>
-
-  <div class="perf" role="presentation"></div>
-
   <section class="stub footer-stub">
     <div class="barcode" aria-hidden="true"></div>
     <p class="with-love">See you at the table, one more time.</p>
@@ -400,19 +322,6 @@
 </main>
 
 <script>
-  // ---- Personalize passenger name ----
-  const nameInput = document.getElementById('passengerName');
-  const letterTo = document.getElementById('letterTo');
-  const savedName = localStorage.getItem('nb_name') || '';
-  nameInput.value = savedName;
-  if (savedName) letterTo.textContent = 'Dear ' + savedName + ',';
-
-  nameInput.addEventListener('input', () => {
-    const val = nameInput.value.trim();
-    letterTo.textContent = val ? ('Dear ' + val + ',') : 'Dear friend,';
-    localStorage.setItem('nb_name', nameInput.value);
-  });
-
   // ---- Countdown ----
   const eventDate = new Date('2026-09-27T11:00:00+05:30');
   const clock = document.getElementById('clock');
@@ -439,11 +348,11 @@
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'BEGIN:VEVENT',
-      'SUMMARY:One Last Lunch with Nandun',
+      'SUMMARY:One Last Lunch with Oshini',
       'DTSTART:20260927T110000',
       'DTEND:20260927T133000',
       'LOCATION:Kings Kandy Rooftop\\, Level 4\\, 21 Raja Veediya\\, Kandy',
-      'DESCRIPTION:A little goodbye lunch before Nandun leaves for a new chapter abroad. No gifts\\, just bring your smile and memories.',
+      'DESCRIPTION:A little goodbye lunch before Oshini leaves for the UK. No gifts\\, just bring your smile and memories.',
       'END:VEVENT',
       'END:VCALENDAR'
     ].join('\r\n');
@@ -456,58 +365,6 @@
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
-  });
-
-  // ---- Guestbook (stored per-visitor's own browser) ----
-  const entriesEl = document.getElementById('entries');
-  const STORAGE_KEY = 'nb_notes';
-
-  function loadNotes(){
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch(e){ return []; }
-  }
-  function renderNotes(){
-    const notes = loadNotes();
-    entriesEl.innerHTML = '';
-    if (!notes.length){
-      entriesEl.innerHTML = '<p class="empty-log">No notes saved on this device yet.</p>';
-      return;
-    }
-    notes.slice().reverse().forEach(n => {
-      const div = document.createElement('div');
-      div.className = 'entry';
-      const who = document.createElement('div');
-      who.className = 'who';
-      who.textContent = n.name || 'A friend';
-      const msg = document.createElement('div');
-      msg.className = 'msg';
-      msg.textContent = n.message;
-      const stamp = document.createElement('div');
-      stamp.className = 'stamp';
-      stamp.textContent = new Date(n.time).toLocaleString();
-      div.appendChild(who); div.appendChild(msg); div.appendChild(stamp);
-      entriesEl.appendChild(div);
-    });
-  }
-  renderNotes();
-
-  document.getElementById('saveNote').addEventListener('click', () => {
-    const msg = document.getElementById('logMessage').value.trim();
-    if (!msg) return;
-    const notes = loadNotes();
-    notes.push({ name: nameInput.value.trim(), message: msg, time: Date.now() });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-    document.getElementById('logMessage').value = '';
-    renderNotes();
-  });
-
-  document.getElementById('sendNote').addEventListener('click', () => {
-    const msg = document.getElementById('logMessage').value.trim();
-    if (!msg){ alert('Write a note first, then send it.'); return; }
-    const who = nameInput.value.trim() || 'A friend';
-    const subject = encodeURIComponent('A note for you, Nandun');
-    const body = encodeURIComponent('From: ' + who + '\n\n' + msg);
-    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
   });
 </script>
 
