@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>One Last Lunch — A Little Goodbye</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,6 +36,8 @@
     padding: clamp(20px, 5vw, 64px) 16px 80px;
     position:relative;
     overflow-x:hidden;
+    padding-top: max(clamp(20px, 5vw, 64px), env(safe-area-inset-top, 0px));
+    padding-bottom: max(80px, env(safe-area-inset-bottom, 0px));
   }
   .cloud{
     position:fixed;
@@ -294,7 +296,7 @@
       </div>
       <div class="field full">
         <div class="lbl">GATE</div>
-        <div class="val"><a href="https://www.google.com/search?q=https%3A%2F%2Fmaps.app.goo.gl%2FrguCLW2Mn3ngqzy86" target="_blank" rel="noopener">Kings Kandy Rooftop — Level 4, 21 Raja Veediya, Kandy</a></div>
+        <div class="val"><a href="https://maps.app.goo.gl/rguCLW2Mn3ngqzy86" target="_blank" rel="noopener">Kings Kandy Rooftop — Level 4, 21 Raja Veediya, Kandy</a></div>
       </div>
     </div>
 
@@ -304,8 +306,7 @@
     </div>
 
     <div class="actions">
-      <button class="btn primary" id="addCal">Get directions from Google Maps</button>
-      <a class="btn" href="https://www.google.com/search?q=https%3A%2F%2Fmaps.app.goo.gl%2FrguCLW2Mn3ngqzy86" target="_blank" rel="noopener"></a>
+      <a class="btn primary" href="https://maps.app.goo.gl/rguCLW2Mn3ngqzy86" target="_blank" rel="noopener">Get directions from Google Maps</a>
     </div>
 
     <p class="gifts">No gifts, please — just bring your smile.</p>
@@ -341,31 +342,6 @@
   }
   tick();
   setInterval(tick, 1000);
-
-  // ---- Add to calendar (.ics) ----
-  document.getElementById('addCal').addEventListener('click', () => {
-    const ics = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'BEGIN:VEVENT',
-      'SUMMARY:One Last Lunch with Oshini',
-      'DTSTART:20260927T110000',
-      'DTEND:20260927T133000',
-      'LOCATION:Kings Kandy Rooftop\\, Level 4\\, 21 Raja Veediya\\, Kandy',
-      'DESCRIPTION:A little goodbye lunch before Oshini leaves for the UK. No gifts\\, just bring your smile and memories.',
-      'END:VEVENT',
-      'END:VCALENDAR'
-    ].join('\r\n');
-    const blob = new Blob([ics], {type: 'text/calendar'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'one-last-lunch.ics';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  });
 </script>
 
 </body>
